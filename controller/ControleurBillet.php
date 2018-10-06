@@ -2,12 +2,14 @@
 
 require_once 'Model/BilletManager.php';
 require_once 'Model/CommentaireManager.php';
+require_once 'Model/Commentaire.php';
 require_once 'views/Vue.php';
 
 class ControleurBillet {
 
     private $billet;
     private $commentaire;
+    private $comment;
 
     public function __construct() {
         $this->billet = new BilletManager();
@@ -25,8 +27,14 @@ class ControleurBillet {
 
     // Ajoute un commentaire à un billet
     public function commenter($auteur, $contenu, $idBillet) {
+
+        $comment = new Commentaire();
+
+        $comment->setAuthor($auteur);
+        $comment->setComment($contenu);
+        $comment->setIdBillet($idBillet);
         // Sauvegarde du commentaire
-        $this->commentaire->ajouterCommentaire($auteur, $contenu, $idBillet);
+        $this->commentaire->ajouterCommentaire($comment);
         // Actualisation de l'affichage du billet
         $this->billet($idBillet);
     }

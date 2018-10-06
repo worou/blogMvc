@@ -5,7 +5,8 @@
  * Date: 24/09/2018
  * Time: 00:28
  */
-Class Commentaire extends Entity {
+require_once 'Entity.php';
+Class Commentaire {
 
 
     private $author;
