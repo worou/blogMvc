@@ -26,6 +26,15 @@ class CommentaireManager extends Manager
        return $commentaires;
     }
 
+    // Ajoute un commentaire dans la base
+    public function ajouterCommentaire($auteur, $contenu, $idBillet) {
+        $sql = 'insert into T_COMMENTAIRE(COM_DATE, COM_AUTEUR, COM_CONTENU, BIL_ID)'
+            . ' values(NOW(), ?, ?, ?)';
+        $req = $this->db->prepare($sql);
+        //$date = date(DATE_W3C);  // Récupère la date courante
+        $req->execute(array($auteur, $contenu, (int)$idBillet));
+    }
+
   /*  public function getComments(Billet $billet)
 
     {
